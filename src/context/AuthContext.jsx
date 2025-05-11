@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const filter = btoa(JSON.stringify({ Skip: 0, Limit: 1, Types: [1] }));
             await axios.get(`${import.meta.env.VITE_API_BASE_URL}/Materials/GetAll/?filter=${filter}`, {
-            headers: { Authorization: `Bearer ${storedToken}` }
+                headers: { Authorization: `Bearer ${storedToken}` }
             });
             setUser(JSON.parse(storedUser));
             setToken(storedToken);
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
             console.error('Token validation error:', error);
             const refreshed = await refreshAccessToken();
             if (!refreshed) {
-            logout();
+                logout();
             }
         }
         }
@@ -41,17 +41,17 @@ export const AuthProvider = ({ children }) => {
     const login = async (username, password) => {
     try {
         const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/AdminAccount/Login`, {
-        UserName: username,
-        Password: password
+            UserName: username,
+            Password: password
         });
         if (response.data.Success) {
-        setUser(response.data.User);
-        setToken(response.data.Token);
-        setRefreshToken(response.data.RefreshToken);
-        localStorage.setItem('accessToken', response.data.Token);
-        localStorage.setItem('refreshToken', response.data.RefreshToken);
-        localStorage.setItem('user', JSON.stringify(response.data.User));
-        return true;
+            setUser(response.data.User);
+            setToken(response.data.Token);
+            setRefreshToken(response.data.RefreshToken);
+            localStorage.setItem('accessToken', response.data.Token);
+            localStorage.setItem('refreshToken', response.data.RefreshToken);
+            localStorage.setItem('user', JSON.stringify(response.data.User));
+            return true;
         }
         return false;
     } catch (error) {
@@ -63,17 +63,17 @@ export const AuthProvider = ({ children }) => {
     const refreshAccessToken = async () => {
     try {
         const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/Account/RefreshToken`, {
-        AccessToken: token,
-        RefreshToken: refreshToken
+            AccessToken: token,
+            RefreshToken: refreshToken
         });
         if (response.data.Success) {
-        setToken(response.data.Token);
-        setRefreshToken(response.data.RefreshToken);
-        setUser(response.data.User);
-        localStorage.setItem('accessToken', response.data.Token);
-        localStorage.setItem('refreshToken', response.data.RefreshToken);
-        localStorage.setItem('user', JSON.stringify(response.data.User));
-        return true;
+            setToken(response.data.Token);
+            setRefreshToken(response.data.RefreshToken);
+            setUser(response.data.User);
+            localStorage.setItem('accessToken', response.data.Token);
+            localStorage.setItem('refreshToken', response.data.RefreshToken);
+            localStorage.setItem('user', JSON.stringify(response.data.User));
+            return true;
         }
         return false;
     } catch (error) {
@@ -83,12 +83,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-    setUser(null);
-    setToken(null);
-    setRefreshToken(null);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
+        setUser(null);
+        setToken(null);
+        setRefreshToken(null);
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
     };
 
     return (

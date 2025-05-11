@@ -75,12 +75,12 @@ const Login = () => {
                         Sign In
                     </button>
                 </form>
-                <p className="mt-4 text-center text-sm text-gray-600">
+                {/* <p className="mt-4 text-center text-sm text-gray-600">
                     Forgot your password?{' '}
                     <a href="#" className="text-blue-600 hover:underline">
                         Reset it
                     </a>
-                </p>
+                </p> */}
             </div>
         </div>
     );
